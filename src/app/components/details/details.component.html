@@ -1,0 +1,25 @@
+
+<div *ngIf="listFan.length == 0">
+    <h4>Pas de profil à afficher !</h4>
+</div>
+<div *ngIf="listFan.length > 0">
+    <h3>Profils : </h3>
+    <ul>
+        <li *ngFor="let fan of listFan; let index = index"> 
+            {{fan.Name}}
+                <button mat-raised-button (click)="toggleVisible(index)">
+                    <span class="material-icons">format_list_bulleted</span>
+                    Détails
+                </button>
+            <div *ngIf="fan.Visible" id="hideD">
+                <p>Date de naissance : {{fan.BirthDate}}</p>
+                <ul>
+                    <p>Liste de séries :</p>
+                    <li *ngFor="let series of fan.ListSeries; let indexS= index">
+                        Série {{indexS+1}} : {{series}}
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>

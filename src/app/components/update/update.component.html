@@ -1,0 +1,95 @@
+<body>
+    <div *ngIf="listFan.length == 0">
+        <h4>Pas de profil existant !</h4>
+    </div>
+    
+    <div *ngIf="listFan.length > 0">
+        <h3>Profils : </h3>
+        <ul>
+            <li *ngFor="let fan of listFan; let indexF = index"> 
+                {{fan.Name}}
+                    <button mat-raised-button (click)="toggleVisible(indexF)">
+                        <span class="material-icons">format_list_bulleted</span>
+                        Mettre à jour
+                    </button>
+                    <div *ngIf="SupUser" class="alert">
+                        <p class="alerttext">Le profil de {{fan.Name}} va etre supprimé </p>
+                        <button mat-raised-button (click)="deleteU()" class="alertbtn">
+                            <span class="material-icons">done</span>
+                        </button>
+                    </div>
+                <div *ngIf="fan.Visible" id="hideD">
+                    <form [formGroup]="myForm">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Nom</mat-label>
+                            <input type="text" formControlName="Nom" matInput [(ngModel)]="fan.Name">
+                        </mat-form-field>
+                        <br>
+                        <p *ngIf="myForm.controls['Nom'].invalid">
+                            {{myForm.controls['Nom'].errors ? myForm.controls['Nom'].errors['TropCourtError'] : ''}}
+                        </p>
+                        <br>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Date de Naissance</mat-label>  
+                            <input matInput type="date" formControlName="DateB" [(ngModel)]="fan.BirthDate">
+                        </mat-form-field>
+                        <br>
+                        <p *ngIf="myForm.controls['DateB'].invalid">
+                            {{myForm.controls['DateB'].errors ? myForm.controls['DateB'].errors['AgeError'] : ''}}
+                        </p>
+                        <br>
+                        <ul>
+                            <p>Liste de séries :</p>
+                            <li *ngFor="let series of fan.ListSeries; let indexS= index">
+                                Série {{indexS+1}} : {{series}}
+                                <input matInput type="text" [value]="series">
+                                <button mat-raised-button class="del" (click)="delAlert(indexS, indexF)">
+                                    <span class="material-icons">delete</span>
+                                </button>
+                            </li>
+                            <div *ngIf="SupSerie" class="alert">
+                                <p class="alerttext">La série {{listFan[iF].ListSeries[iS]}} va etre supprimé </p>
+                                <button mat-raised-button (click)="delSeries()" class="alertbtn">
+                                    <span class="material-icons">done</span>
+                                </button>
+                            </div>
+                        </ul>
+                        <button mat-raised-button type="button"  [disabled]="!myForm.valid" (click)="update(indexF)">
+                            <span class="material-icons">how_to_reg</span>
+                            Modifier
+                        </button>
+                        <br>
+                        <button mat-raised-button type="button" (click)="ToSerie()" id="ajout">
+                            <span class="material-icons">add</span>
+                            Ajouter une série
+                        </button>
+                        <br>
+                    </form>
+                    <form [formGroup]="myFormS">
+                        <div *ngIf="AjoutSerie">
+                            <div >
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Série à ajouter</mat-label>
+                                    <input matInput type="text" formControlName="Serie" [(ngModel)]="name" >
+                                </mat-form-field>
+                                <br>
+                                <p *ngIf="myFormS.controls['Serie'].invalid">
+                                    {{myFormS.controls['Serie'].errors ? myFormS.controls['Serie'].errors['TropCourtError'] : ''}}
+                                </p>
+                            </div>
+                                <button mat-raised-button (click)="modifS(indexF)" [disabled]="!myFormS.valid">
+                                    <span class="material-icons">done</span>
+                                    Ajouter
+                                </button>
+                        </div>
+                    </form>
+                    <br>
+                    <button mat-raised-button type="button"  (click)="delAlertUser(indexF)">
+                        <span class="material-icons">delete_forever</span>
+                        Supprimer le profil
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>

@@ -1,0 +1,30 @@
+ul {
+    list-style-type: none;
+}
+li{
+    padding-bottom: 15px;
+}
+button{
+    margin-left: 50px;
+    margin-bottom: 25px;
+}
+
+#ajout{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.alert{
+    border-color: red;
+    border-style: inset;
+    padding-bottom: 15px;
+}
+.alerttext{
+    position: relative;
+    left: 40%;
+    top: 0;
+}
+.alertbtn{
+    position: relative;
+    left: 40%;
+    bottom: 0;
+}

@@ -1,0 +1,26 @@
+header {
+    position : fixed;
+    top : 0;
+    left : 43%;
+}
+.nav{
+    position: fixed;
+    left : 0;
+    top : 100px;
+    padding: 10px;
+    width: 15%;
+    height: 80%;
+}
+.content {
+    position : absolute;
+    top : 150px;
+    left : 15%;
+    padding : 30px;
+    width: 70%;
+}
+.footer{
+    position: fixed;
+    bottom: 0;
+    left: 40%;
+}
+    

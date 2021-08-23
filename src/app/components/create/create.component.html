@@ -1,0 +1,41 @@
+<body>
+    <h3>Création de profil</h3>
+    <form [formGroup]="myForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Nom</mat-label>
+            <input type="text" formControlName="Nom" matInput>
+        </mat-form-field>
+        <br>
+        <p *ngIf="myForm.controls['Nom'].invalid">
+            {{myForm.controls['Nom'].errors ? myForm.controls['Nom'].errors['TropCourtError'] : ''}}
+        </p>
+        <br>
+        <mat-form-field appearance="outline">
+            <mat-label>Date de Naissance</mat-label>  
+            <input matInput type="date" formControlName="DateB" >
+        </mat-form-field>
+        <br>
+        <p *ngIf="myForm.controls['DateB'].invalid">
+            {{myForm.controls['DateB'].errors ? myForm.controls['DateB'].errors['AgeError'] : ''}}
+        </p>
+        <br>
+        <button mat-raised-button  type="button" (click)="addControlToArray()">Ajouter une Série</button>
+        <br>
+        <div *ngIf="getSeriesArray().controls != null" formArrayName="ListS">
+            <div *ngFor="let control of getSeriesArray().controls; let i = index">
+                <p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Série {{i+1}}</mat-label>
+                        <input matInput type="text" [formControlName]="i">
+                    </mat-form-field>
+                    <button mat-raised-button (click)="SupprimerS(i)" >-</button>
+                </p>
+            </div>
+        </div>
+        <br>
+        <button mat-raised-button type="button"  [disabled]="!myForm.valid" (click)="ajouter()" routerLink=''>
+            <span class="material-icons">how_to_reg</span>
+            Valider
+        </button>
+    </form>
+</body>
